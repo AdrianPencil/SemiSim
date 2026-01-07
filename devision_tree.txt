@@ -1,0 +1,157 @@
+PROJECT_ROOT/
+├─ pyproject.toml
+├─ README.md
+├─ LICENSE
+├─ CITATION.cff
+├─ requirements.txt
+├─ .gitignore
+├─ .pre-commit-config.yaml
+├─ .github/
+│  └─ workflows/
+│     └─ ci.yml
+│
+├─ docs/
+│  ├─ README.md
+│  ├─ api/
+│  └─ design/
+│     └─ architecture.md
+│
+├─ notebooks/
+│  ├─ diode_demo.ipynb
+│  └─ moscap_demo.ipynb
+│
+├─ examples/
+│  ├─ diode1d/
+│  │  ├─ config.yml
+│  │  └─ run.sh
+│  └─ moscap/
+│     ├─ config.yml
+│     └─ analyze.py
+│
+├─ data/
+│  ├─ materials.csv
+│  └─ layers_example.csv
+│
+├─ reports/
+│  ├─ figures/
+│  │  └─ Makefile
+│  └─ templates/
+│     └─ compare.html.j2
+│
+├─ runs/
+│  └─ .gitkeep
+│
+└─ semisim/
+   ├─ main.py
+   ├─ config.yaml
+   │
+   ├─ io/
+   │  ├─ config.py
+   │  ├─ materials_csv.py
+   │  ├─ layers_csv.py
+   │  ├─ ingest.py
+   │  ├─ logic.py #schema
+   │  ├─ normalize.py
+   │  ├─ experimental_csv.py
+   │  ├─ band_params.py
+   │  └─ results.py
+   │
+   ├─ models/
+   │  ├─ material.py
+   │  └─ layer.py
+   │
+   ├─ materials/
+   │  ├─ database.py
+   │  ├─ models.py
+   │  └─ __init__.py
+   │
+   ├─ geometry/
+   │  ├─ builder.py
+   │  ├─ mesher.py
+   │  └─ __init__.py
+   │
+   ├─ physics/
+   │  ├─ poisson.py
+   │  ├─ continuity.py
+   │  ├─ heat.py
+   │  ├─ transport.py
+   │  ├─ recombination.py
+   │  ├─ polarization.py
+   │  ├─ traps.py
+   │  ├─ interfaces.py
+   │  ├─ charge.py
+   │  └─ carriers/
+   │     ├─ statistics.py
+   │     ├─ bands.py
+   │     └─ intrinsic.py
+   │
+   ├─ boundaries/
+   │  ├─ electrical.py
+   │  ├─ thermal.py
+   │  └─ mos.py
+   │
+   ├─ discretization/
+   │  ├─ mesh.py
+   │  ├─ spaces.py
+   │  ├─ quadrature.py
+   │  ├─ interface.py
+   │  └─ assemble.py
+   │
+   ├─ solver/
+   │  ├─ assembly.py
+   │  ├─ nonlinear.py
+   │  ├─ linear.py
+   │  └─ time_integration.py
+   │
+   ├─ postprocess/
+   │  ├─ extract_iv.py
+   │  ├─ extract_cv.py
+   │  ├─ thermal_metrics.py
+   │  └─ visualization.py
+   │
+   ├─ viz/
+   │  └─ plots.py
+   │
+   ├─ adapters/
+   │  ├─ tcad_runner.py
+   │  └─ tcad_parser.py
+   │
+   ├─ workflows/
+   │  ├─ run_dc.py
+   │  ├─ sweep.py
+   │  ├─ bench.py
+   │  └─ validate_exp.py
+   │
+   ├─ apps/
+   │  └─ viewer_streamlit.py
+   │
+   ├─ utils/
+   │  ├─ logger.py
+   │  └─ units.py
+   │
+   ├─ configs/
+   │  ├─ moscap.yml
+   │  ├─ materials.csv
+   │  ├─ bands.yml
+   │  └─ experiments/
+   │     └─ moscap_roomT.yml
+   │
+   ├─ validation/
+   │  ├─ cases/
+   │  │  └─ moscap.yml
+   │  └─ tolerances.yml
+   │
+   └─ tests/
+      ├─ test_diode.py
+      ├─ test_moscap.py
+      ├─ test_heat.py
+      ├─ test_coupling.py
+      ├─ test_polarization_charge.py
+      ├─ test_traps_ode.py
+      ├─ test_band_edges_moscap.py
+      ├─ test_cv_moscap_ideal.py
+      ├─ test_carrier_stats.py
+      ├─ test_poisson_rhs.py
+      ├─ test_poisson_mms.py
+      ├─ test_displacement_jump.py
+      └─ test_TBR_jump.py

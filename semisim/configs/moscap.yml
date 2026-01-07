@@ -1,0 +1,26 @@
+# MOS capacitor demo config (minimal)
+geometry:
+  type: moscap
+  tox_m: 2e-9
+  tsi_m: 10e-9
+
+mesh:
+  h_core_m: 1e-9
+
+physics:
+  enable: [polarization, traps, mos_interface]
+  temperature_coupling: true
+  models:
+    mobility: caughey_thomas
+    recombination: SRH
+materials_db: configs/materials.csv
+layers_csv: configs/layers.csv
+
+solver:
+  method: newton
+  atol: 1e-8
+  rtol: 1e-6
+
+outputs:
+  save_fields: [phi,n,p,T]
+  metrics: [IV,Ron,Rth]

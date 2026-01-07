@@ -1,0 +1,60 @@
+{
+  "T_K": 300.0,
+
+  "solver": {
+    "mode": "hybrid",
+    "newton_switch_scaled_tol": 1e-2
+  },
+
+  "hemt": {
+    "enable": true,
+    "Erel_eV": 0.08
+  },
+
+  "step1": {
+    "include_carriers": false,
+    "stats": "MB",
+    "max_gummel": 20,
+    "tol_res_inf": 1e-4,
+    "debug": false,
+    "debug_every": 5
+  },
+
+  "step2": {
+    "include_carriers": true,
+    "stats": "MB",
+    "max_newton": 80,
+    "tol_res_inf": 1e-5,
+    "debug": false,
+    "debug_every": 5
+  },
+
+  "homotopy": {
+    "enable": true,
+    "start_scale": 1e-3,
+    "stop_scale": 1.0,
+    "grow": 3.0,
+    "shrink": 0.3,
+    "success_factor": 5.0,
+    "max_failures": 3,
+    "verbose": false
+  },
+
+  "poisson": {
+    "max_step_volts": 0.2,
+    "damping_init": 1.0,
+    "damping_min": 1e-4,
+    "debug": false,
+    "debug_every": 1
+  },
+
+  "transport": {
+    "combine": "matthiessen",
+    "channels": [
+      { "name": "acoustic_deformation",          "params": { "K": 1.0 },     "enabled": true,  "carrier": "both" },
+      { "name": "polar_optical_phonon",          "params": { "K": 0.2 },     "enabled": true,  "carrier": "n"    },
+      { "name": "background_ionized_impurities", "params": { "K": 1e-25 },   "enabled": true,  "carrier": "both" },
+      { "name": "interface_roughness",           "params": { "K": 1.0, "Delta_rms_m": 2.5e-10, "L_corr_m": 2e-9 }, "enabled": false, "carrier": "both" }
+    ]
+  }
+}

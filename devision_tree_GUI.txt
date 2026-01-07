@@ -1,0 +1,228 @@
+PROJECT_ROOT/
+├─ pyproject.toml
+├─ README.md
+├─ LICENSE
+├─ CITATION.cff
+├─ requirements.txt                 # include PyQt6, matplotlib/pyqtgraph as needed
+├─ .gitignore
+├─ .pre-commit-config.yaml
+├─ .github/
+│  └─ workflows/
+│     └─ ci.yml
+│
+├─ docs/
+│  ├─ README.md
+│  ├─ user_guide/
+│  │  ├─ getting_started_gui.md
+│  │  ├─ simulation_workflows.md
+│  │  └─ troubleshooting.md
+│  └─ design/
+│     └─ architecture.md
+│
+├─ notebooks/
+│  ├─ diode_demo.ipynb
+│  └─ moscap_demo.ipynb
+│
+├─ examples/
+│  ├─ diode1d/
+│  │  ├─ config.yml
+│  │  └─ run.sh
+│  └─ moscap/
+│     ├─ config.yml
+│     └─ analyze.py
+│
+├─ data/
+│  ├─ materials.csv
+│  └─ layers_example.csv
+│
+├─ reports/
+│  ├─ figures/
+│  │  └─ Makefile
+│  └─ templates/
+│     └─ compare.html.j2
+│
+├─ runs/
+│  └─ .gitkeep
+│
+├─ scripts/
+│  ├─ dev_desktop.sh               # run the PyQt app in dev mode
+│  ├─ build_desktop.sh             # build installers with PyInstaller
+│  └─ package_assets.sh            # bundle icons, styles
+│
+├─ packaging/
+│  ├─ pyinstaller/
+│  │  ├─ semisim_gui.spec          # PyInstaller spec file
+│  │  └─ hooks/                    # custom hooks if needed
+│  ├─ windows/
+│  │  └─ nsis_script.nsi           # optional Windows installer script
+│  ├─ macos/
+│  │  └─ dmg_settings.json         # optional DMG packaging settings
+│  └─ linux/
+│     └─ appimage.yml              # optional AppImage settings
+│
+├─ ui/
+│  └─ desktop/                     # PyQt6 Desktop Application
+│     ├─ app.py                    # GUI entrypoint (creates QApplication)
+│     │
+│     ├─ core/                     # app-wide state & configuration
+│     │  ├─ settings.py            # user prefs: runs path, theme, last config
+│     │  ├─ state.py               # current run id, progress, selections
+│     │  └─ events.py              # signals/slots, pub-sub glue
+│     │
+│     ├─ services/                 # thin adapters calling semisim workflows
+│     │  ├─ run_service.py         # start single sim, poll status, cancel
+│     │  ├─ sweep_service.py       # launch parameter sweeps
+│     │  ├─ bench_service.py       # TCAD benchmark orchestration
+│     │  ├─ validate_service.py    # experimental C–V comparison
+│     │  └─ viz_service.py         # load runs/<id>/fields.npz → plot-ready arrays
+│     │
+│     ├─ viewmodels/               # presentation logic (no UI code)
+│     │  ├─ simulate_vm.py
+│     │  ├─ runs_vm.py
+│     │  ├─ runviewer_vm.py
+│     │  ├─ validate_vm.py
+│     │  └─ bench_vm.py
+│     │
+│     ├─ views/                    # Qt Designer .ui + Python wrappers
+│     │  ├─ MainWindow.ui
+│     │  ├─ SimulateView.ui        # select config/materials; launch
+│     │  ├─ RunsView.ui            # table of past runs; open/delete
+│     │  ├─ RunViewerView.ui       # tabs: Band, I–V, C–V, Fields, Thermal, Logs
+│     │  ├─ ValidateView.ui        # load experimental CSV; show errors
+│     │  ├─ BenchView.ui           # TCAD comparison setup
+│     │  └─ SettingsDialog.ui
+│     │
+│     ├─ widgets/                  # reusable UI components
+│     │  ├─ BandDiagramWidget.py   # embeds matplotlib/pyqtgraph
+│     │  ├─ CVPlotWidget.py
+│     │  ├─ IVPlotWidget.py
+│     │  ├─ FieldPlotWidget.py
+│     │  ├─ ThermalPlotWidget.py
+│     │  └─ LogConsole.py
+│     │
+│     ├─ assets/                   # visuals & styles
+│     │  ├─ icons/
+│     │  │  ├─ app.png
+│     │  │  ├─ run.svg
+│     │  │  ├─ plots.svg
+│     │  │  └─ settings.svg
+│     │  └─ styles/
+│     │     ├─ theme.qss           # Qt stylesheet (light/dark)
+│     │     └─ fonts/
+│     │
+│     ├─ tests/                    # optional GUI smoke tests
+│     │  └─ test_launch_smoke.py
+│     │
+│     └─ README.md                 # how to run/build the desktop app
+│
+└─ semisim/
+   ├─ main.py
+   ├─ config.yaml
+   │
+   ├─ io/
+   │  ├─ config.py
+   │  ├─ materials_csv.py
+   │  ├─ layers_csv.py
+   │  ├─ experimental_csv.py
+   │  ├─ band_params.py
+   │  └─ results.py
+   │
+   ├─ models/
+   │  ├─ material.py
+   │  └─ layer.py
+   │
+   ├─ materials/
+   │  ├─ database.py
+   │  ├─ models.py
+   │  └─ __init__.py
+   │
+   ├─ geometry/
+   │  ├─ builder.py
+   │  ├─ mesher.py
+   │  └─ __init__.py
+   │
+   ├─ physics/
+   │  ├─ poisson.py
+   │  ├─ continuity.py
+   │  ├─ heat.py
+   │  ├─ transport.py
+   │  ├─ recombination.py
+   │  ├─ polarization.py
+   │  ├─ traps.py
+   │  ├─ interfaces.py
+   │  ├─ charge.py
+   │  └─ carriers/
+   │     ├─ statistics.py
+   │     ├─ bands.py
+   │     └─ intrinsic.py
+   │
+   ├─ boundaries/
+   │  ├─ electrical.py
+   │  ├─ thermal.py
+   │  └─ mos.py
+   │
+   ├─ discretization/
+   │  ├─ mesh.py
+   │  ├─ spaces.py
+   │  ├─ quadrature.py
+   │  ├─ interface.py
+   │  └─ assemble.py
+   │
+   ├─ solver/
+   │  ├─ assembly.py
+   │  ├─ nonlinear.py
+   │  ├─ linear.py
+   │  └─ time_integration.py
+   │
+   ├─ postprocess/
+   │  ├─ extract_iv.py
+   │  ├─ extract_cv.py
+   │  ├─ thermal_metrics.py
+   │  └─ visualization.py
+   │
+   ├─ viz/
+   │  └─ plots.py
+   │
+   ├─ adapters/
+   │  ├─ tcad_runner.py
+   │  └─ tcad_parser.py
+   │
+   ├─ workflows/
+   │  ├─ run_dc.py
+   │  ├─ sweep.py
+   │  ├─ bench.py
+   │  └─ validate_exp.py
+   │
+   ├─ apps/
+   │  └─ viewer_streamlit.py       # optional quick demo app; can be kept or removed
+   │
+   ├─ utils/
+   │  ├─ logger.py
+   │  └─ units.py
+   │
+   ├─ configs/
+   │  ├─ moscap.yml
+   │  ├─ materials.csv
+   │  ├─ bands.yml
+   │  └─ experiments/
+   │     └─ moscap_roomT.yml
+   │
+   ├─ validation/
+   │  ├─ cases/
+   │  │  └─ moscap.yml
+   │  └─ tolerances.yml
+   │
+   └─ tests/
+      ├─ test_diode.py
+      ├─ test_moscap.py
+      ├─ test_heat.py
+      ├─ test_coupling.py
+      ├─ test_polarization_charge.py
+      ├─ test_traps_ode.py
+      ├─ test_band_edges_moscap.py
+      ├─ test_cv_moscap_ideal.py
+      ├─ test_carrier_stats.py
+      ├─ test_poisson_rhs.py
+      ├─ test_poisson_mms.py
+      ├─ test_displacement_jump.py
+      └─ test_TBR_jump.py
