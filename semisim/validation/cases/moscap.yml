@@ -1,0 +1,18 @@
+# validation/cases/moscap.yml
+device: moscap
+our_config: configs/moscap.yml
+tcad:
+  deck: external/tcad/moscap_des.tdr    # or container image + args
+  runner: docker                        # options: docker|subprocess
+  outputs:
+    - IV.csv
+    - CV.csv
+metrics:
+  - name: VT
+    extractor: moscap.vt_from_cv
+    tolerance: {abs: 20e-3}
+  - name: Cox
+    extractor: moscap.cox_from_cv
+    tolerance: {rel: 0.05}
+report:
+  include_plots: [IV, CV, field_lines]
